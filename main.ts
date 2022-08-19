@@ -17,17 +17,18 @@ let aprendizTable: HTMLElement = document.getElementById("aprendiz")!;
 let estadisticasTable: HTMLElement = document.getElementById("estadisticas")!;
 let cursosTable: HTMLElement = document.getElementById("cursos")!;
 let btnFilter: HTMLElement = document.getElementById("boton-filtro")!;
-let btnFilterFormaLamda: HTMLElement = document.getElementById("boton-filtro-Skip!!")!;
+//let btnFilterFormaLamda: HTMLElement = document.getElementById("boton-filtro-Skip!!")!;
 let textoBusqueda: HTMLInputElement = <HTMLInputElement> document.getElementById("texto-busqueda")!;
 
 
-btnFilterFormaLamda.onclick = () =>{
-    let text: string =  textoBusqueda.value;
-    text =  (text == null)? "": text;
-    cursosTable.getElementsByTagName("tbody")[0].remove();
-    let cursosFiltrados: Curso[] = ap.cursos.filter(function(c){return c.nombre.match(text)})
-    mostrarCursosAprendiz(cursosFiltrados);
-};
+// btnFilterFormaLamda.onclick = () =>{
+//     let text: string =  textoBusqueda.value;
+//     text =  (text == null)? "": text;
+//     cursosTable.getElementsByTagName("tbody")[0].remove();
+//     let cursosFiltrados: Curso[] = ap.cursos.filter(function(c){return c.nombre.match(text)})
+//     mostrarCursosAprendiz(cursosFiltrados);
+// };
+
 btnFilter.onclick = filtrarPorNombre;
 
 
@@ -67,16 +68,20 @@ function mostrarEstadisticas(aprendiz: Aprendiz): void{
 
 function mostrarCursosAprendiz(cursos: Curso[]): void{
     let cursosTbody = document.createElement("tbody");
+    let index: number = 0;
+
+    let estado: string[] = cursos.map(c => (c.horas > 60)? 'green': 'red');
    for (let curso of cursos) {
     let trElement: HTMLElement = document.createElement("tr");
     trElement.innerHTML = 
     `
     <td>${curso.nombre}</td>
     <td>${curso.calificaciion}</td>
-    <td>${curso.horas}</td>
+    <td style= "color: ${estado[index]}">${curso.horas}</td>
     <td>${curso.anio}</td>
     `
     cursosTbody.appendChild(trElement);
+    index++;
    }
    cursosTable.appendChild(cursosTbody);
 

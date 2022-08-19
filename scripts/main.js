@@ -12,7 +12,15 @@ var aprendizTable = document.getElementById("aprendiz");
 var estadisticasTable = document.getElementById("estadisticas");
 var cursosTable = document.getElementById("cursos");
 var btnFilter = document.getElementById("boton-filtro");
+//let btnFilterFormaLamda: HTMLElement = document.getElementById("boton-filtro-Skip!!")!;
 var textoBusqueda = document.getElementById("texto-busqueda");
+// btnFilterFormaLamda.onclick = () =>{
+//     let text: string =  textoBusqueda.value;
+//     text =  (text == null)? "": text;
+//     cursosTable.getElementsByTagName("tbody")[0].remove();
+//     let cursosFiltrados: Curso[] = ap.cursos.filter(function(c){return c.nombre.match(text)})
+//     mostrarCursosAprendiz(cursosFiltrados);
+// };
 btnFilter.onclick = filtrarPorNombre;
 function filtrarPorNombre() {
     var text = textoBusqueda.value;
@@ -34,12 +42,15 @@ function mostrarEstadisticas(aprendiz) {
 }
 function mostrarCursosAprendiz(cursos) {
     var cursosTbody = document.createElement("tbody");
+    var index = 0;
+    var estado = cursos.map(function (c) { return (c.horas > 60) ? 'green' : 'red'; });
     for (var _i = 0, cursos_1 = cursos; _i < cursos_1.length; _i++) {
         var curso = cursos_1[_i];
         var trElement = document.createElement("tr");
         trElement.innerHTML =
-            "\n    <td>" + curso.nombre + "</td>\n    <td>" + curso.calificaciion + "</td>\n    <td>" + curso.horas + "</td>\n    <td>" + curso.anio + "</td>\n    ";
+            "\n    <td>" + curso.nombre + "</td>\n    <td>" + curso.calificaciion + "</td>\n    <td style= \"color: " + estado[index] + "\">" + curso.horas + "</td>\n    <td>" + curso.anio + "</td>\n    ";
         cursosTbody.appendChild(trElement);
+        index++;
     }
     cursosTable.appendChild(cursosTbody);
 }
