@@ -6,5 +6,5 @@
         "rootDir": "./",
         "strict": true,
         "alwaysStrict": true
-         }
+    }
 }
