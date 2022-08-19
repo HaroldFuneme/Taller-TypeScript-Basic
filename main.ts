@@ -3,7 +3,6 @@ import { Aprendiz, NivelEducativo } from "./aprendiz.js";
 export const ap = new Aprendiz("Harold Hernando", "Funeme Molano", "avatar.png", 33, NivelEducativo.POSTGRADO);
 
 console.log(ap);
-console.log(ap);
 
 let aprendizTable: HTMLElement = document.getElementById("aprendiz")!;
 
