@@ -15,6 +15,7 @@ console.log(ap.cursos);
 
 let aprendizTable: HTMLElement = document.getElementById("aprendiz")!;
 let estadisticasTable: HTMLElement = document.getElementById("estadisticas")!;
+let cursosTable: HTMLElement = document.getElementById("cursos")!;
 
 function mostrarDatosAprendiz(aprendiz: Aprendiz): void{
     let tbodyAprendiz = document.createElement("tbody");
@@ -40,5 +41,23 @@ function mostrarEstadisticas(aprendiz: Aprendiz): void{
 
 }
 
+function mostrarCursosAprendiz(aprendiz: Aprendiz): void{
+    let cursosTbody = document.createElement("tbody");
+   for (let curso of aprendiz.cursos) {
+    let trElement: HTMLElement = document.createElement("tr");
+    trElement.innerHTML = 
+    `
+    <td>${curso.nombre}</td>
+    <td>${curso.calificaciion}</td>
+    <td>${curso.horas}</td>
+    <td>${curso.anio}</td>
+    `
+    cursosTbody.appendChild(trElement);
+   }
+   cursosTable.appendChild(cursosTbody);
+
+}
+
 mostrarDatosAprendiz(ap);
 mostrarEstadisticas(ap);
+mostrarCursosAprendiz(ap);
