@@ -11,6 +11,16 @@ console.log(ap.cursos);
 var aprendizTable = document.getElementById("aprendiz");
 var estadisticasTable = document.getElementById("estadisticas");
 var cursosTable = document.getElementById("cursos");
+var btnFilter = document.getElementById("boton-filtro");
+var textoBusqueda = document.getElementById("texto-busqueda");
+btnFilter.onclick = filtrarPorNombre;
+function filtrarPorNombre() {
+    var text = textoBusqueda.value;
+    text = (text == null) ? "" : text;
+    cursosTable.getElementsByTagName("tbody")[0].remove();
+    var cursosFiltrados = ap.cursos.filter(function (c) { return c.nombre.match(text); });
+    mostrarCursosAprendiz(cursosFiltrados);
+}
 function mostrarDatosAprendiz(aprendiz) {
     var tbodyAprendiz = document.createElement("tbody");
     tbodyAprendiz.innerHTML = "<tr><td colspan=2><img src=\"./" + aprendiz.avatar + "\" height=\"100\"></td></tr>\n    <tr><td>Nombres: </td><td>" + aprendiz.nombre + "</td></tr>\n    <tr><td>Apellidos: </td><td>" + aprendiz.apellido + "</td></tr>\n    <tr><td>Nivel Educativo: </td><td>" + aprendiz.nivelEducativo + "</td></tr>\n    <tr><td>Edad: </td><td>" + aprendiz.edad + "</td></tr>\n    ";
@@ -22,10 +32,10 @@ function mostrarEstadisticas(aprendiz) {
     trElement.innerHTML = "\n    <td><b>Cursos certificados</b></td>\n    <td>" + numeroCertificados + "</td>\n    ";
     estadisticasTable.appendChild(trElement);
 }
-function mostrarCursosAprendiz(aprendiz) {
+function mostrarCursosAprendiz(cursos) {
     var cursosTbody = document.createElement("tbody");
-    for (var _i = 0, _a = aprendiz.cursos; _i < _a.length; _i++) {
-        var curso = _a[_i];
+    for (var _i = 0, cursos_1 = cursos; _i < cursos_1.length; _i++) {
+        var curso = cursos_1[_i];
         var trElement = document.createElement("tr");
         trElement.innerHTML =
             "\n    <td>" + curso.nombre + "</td>\n    <td>" + curso.calificaciion + "</td>\n    <td>" + curso.horas + "</td>\n    <td>" + curso.anio + "</td>\n    ";
@@ -35,4 +45,4 @@ function mostrarCursosAprendiz(aprendiz) {
 }
 mostrarDatosAprendiz(ap);
 mostrarEstadisticas(ap);
-mostrarCursosAprendiz(ap);
+mostrarCursosAprendiz(ap.cursos);
